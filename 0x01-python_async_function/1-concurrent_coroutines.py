@@ -20,7 +20,7 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     tasks = []
     delays = []
 
-    for i in range(n):
+    for idx in range(n):
         task = wait_random(max_delay)
         tasks.append(task)
 
