@@ -21,6 +21,7 @@ The body of the test method should not be longer than 2 lines.
 import unittest
 from parameterized import parameterized
 from utils import access_nested_map, get_json, memoize
+from unittest import patch, Mock
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -54,3 +55,24 @@ class TestAccessNestedMap(unittest.TestCase):
         """
         with self.assertRaises(expected) as context:
             access_nested_map(nested_map, path)
+
+
+class TestGetJson(unittest.TestCase):
+    """
+    Args:
+        unittest (_type_): _description_
+    """
+    @parameterized.expand(
+        [
+            ("http://example.com", {"payload": True})
+            ("http://holberton.io", {"payload": False})
+        ]
+    )
+    def test_get_json(self, url, expected):
+        """
+        summary
+        """
+        mock_result = Mock()
+        mock_result.json.return_value = expected
+        with patch("request.get", return_value=mock_result):
+            response = get_json(url)
