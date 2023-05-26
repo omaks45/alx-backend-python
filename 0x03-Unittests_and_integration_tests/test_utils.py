@@ -64,7 +64,7 @@ class TestGetJson(unittest.TestCase):
     """
     @parameterized.expand(
         [
-            ("http://example.com", {"payload": True})
+            ("http://example.com", {"payload": True}),
             ("http://holberton.io", {"payload": False})
         ]
     )
@@ -72,7 +72,7 @@ class TestGetJson(unittest.TestCase):
         """
         summary
         """
-        mock_result = Mock()
-        mock_result.json.return_value = expected
-        with patch("request.get", return_value=mock_result):
+        mock_response = Mock()
+        mock_response.json.return_value = expected
+        with patch("request.get", return_value=mock_response):
             response = get_json(url)
