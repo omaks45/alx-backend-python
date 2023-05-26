@@ -49,7 +49,8 @@ class TestAccessNestedMap(unittest.TestCase):
         ]
     )
     def test_access_nested_map_exception(self, nested_map, path, expected):
-        """_summary_
+        """
+        summary
         """
         with self.assertRaises(expected) as context:
             access_nested_map(nested_map, path)
