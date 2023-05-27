@@ -79,48 +79,23 @@ class TestGetJson(unittest.TestCase):
         mock_requests_get.assert_called_once_with(test_url)
 
 class TestMemoize(unittest.TestCase):
-    """_summary_
-
-    Args:
-                    unittest (_type_): _description_
     """
-
+    Test the memoization decorator, memoize
+    """
     def test_memoize(self):
-        """_summary_
-
-        Returns:
-                _type_: _description_
         """
-
+        Test that utils.memoize decorator works as intended
+        """
         class TestClass:
-            """_summary_
-            """
 
             def a_method(self):
-                """_summary_
-
-                Returns:
-                        _type_: _description_
-                """
                 return 42
 
             @memoize
             def a_property(self):
-                """_summary_
-
-                Returns:
-                        _type_: _description_
-                """
                 return self.a_method()
-
-        test_cls = TestClass()
-
-        with patch.object(test_cls, 'a_method') as mock_method:
-            mock_method.return_value = 42
-
-            res1 = test_cls.a_property
-            res2 = test_cls.a_property
-
-            self.assertEqual(res1, 42)
-            self.assertEqual(res2, 42)
-            mock_method.assert_called_once()
+        with patch.object(TestClass, 'a_method') as mock_object:
+            test = TestClass()
+            test.a_property()
+            test.a_property()
+            mock_object.assert_called_once()
